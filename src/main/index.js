@@ -1,7 +1,7 @@
 import React from "react";
 import './index.css';
 import axios from "axios";
-
+import {Link} from "react-router-dom";
 
 function MainPageComponent() {
         const [products, setProducts] = React.useState([]);
@@ -30,24 +30,26 @@ function MainPageComponent() {
                     {products.map(function (product, index){
                         return (
                             <div className="product-card">
-                                <div>
-                                <img
-                                className = "product-img"
-                                src={product.imageUrl} />
+                                <Link className="product-link" to = {`/product/${index}`}>
+                                    <div>
+                                        <img
+                                            className = "product-img"
+                                            src={product.imageUrl} />
+                                    </div>
+                                    <div className="product-contents">
+                                        <span className="product-name">
+                                            {product.name}
+                                        </span>
+                                    <span className="product-price">
+                                        {product.price}원
+                                    </span>
+                                    <div className="product-seller">
+                                        <img className="product-avatar" src="images/icons/avatar.png" />
+                                        <span>{product.seller}</span>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
-                        <div className="product-contents">
-                            <span className="product-name">
-                                {product.name}
-                            </span>
-                            <span className="product-price">
-                                {product.price}원
-                            </span>
-                            <div className="product-seller">
-                                <img className="product-avatar" src="images/icons/avatar.png" />
-                                <span>{product.seller}</span>
-                            </div>
-                        </div>
-                    </div>
                         )
                     })}
                     
