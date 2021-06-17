@@ -30,7 +30,7 @@ function MainPageComponent() {
                     {products.map(function (product, index){
                         return (
                             <div className="product-card">
-                                <Link className="product-link" to = {`/product/${index}`}>
+                                <Link className="product-link" to = {`/product/${product.id}`}>
                                     <div>
                                         <img
                                             className = "product-img"
