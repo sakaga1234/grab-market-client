@@ -2,20 +2,19 @@ import { useParams } from "react-router-dom";
 import "./index.css"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { API_URL } from "../config/constants";
 
 function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   useEffect(function () {
     axios
-      .get(
-          `https://71eea40a-3623-42e5-b436-47721d0417d2.mock.pstmn.io/products/${id}`
-        )
-        .then(function (result) {
-            setProduct(result.data);
-          })
-          .catch(function (error) {
-            console.error(error);
+    .get(`${API_URL}/products/${id}`)
+    .then(function (result) {
+      setProduct(result.data.product);
+    })
+    .catch(function (error) {
+      console.error(error);
           });
       }, []);
 
@@ -26,10 +25,10 @@ function ProductPage() {
       return (
         <div>
           <div id="image-box">
-              <img src={"/"+product.imageUrl} />
+              <img src={"/"+product.imageUrl} alt="이미지" />
           </div>
           <div id = "profile-box">
-              <img src="/images/icons/avatar.png" />
+              <img src="/images/icons/avatar.png" alt="이미지" />
               <span>{product.seller}</span>
           </div>
           <div id="contents-box">

@@ -2,11 +2,17 @@ import React from "react";
 import './index.css';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import {API_URL} from "../config/constants.js";
+
+dayjs.extend(relativeTime);
 
 function MainPageComponent() {
         const [products, setProducts] = React.useState([]);
         React.useEffect(function() {
-            axios.get("https://71eea40a-3623-42e5-b436-47721d0417d2.mock.pstmn.io/products")
+            axios
+            .get(`${API_URL}/products`)
             .then(function(result){
             const products = result.data.products;
             setProducts(products);
@@ -16,9 +22,8 @@ function MainPageComponent() {
         }, []);
     return (
         <div>
-            
                 <div id="banner">
-                  <img src="./images/banners/banner1.png" />
+                  <img src="./images/banners/banner1.png" alt="사진입니다." />
                 </div>
                 <h1>판매되는 상품들</h1>
                 <div id="product-list">
@@ -29,7 +34,8 @@ function MainPageComponent() {
                                     <div>
                                         <img
                                             className = "product-img"
-                                            src={product.imageUrl} />
+                                            src={product.imageUrl} 
+                                            alt = "이미지"/>
                                     </div>
                                     <div className="product-contents">
                                         <span className="product-name">
@@ -38,9 +44,12 @@ function MainPageComponent() {
                                     <span className="product-price">
                                         {product.price}원
                                     </span>
-                                    <div className="product-seller">
-                                        <img className="product-avatar" src="images/icons/avatar.png" />
-                                        <span>{product.seller}</span>
+                                    <div className="product-footer">
+                                        <div className="product-seller">
+                                            <img className="product-avatar" src="images/icons/avatar.png" alt="이미지" />
+                                            <span>{product.seller}</span>
+                                        </div>
+                                        <span className="product-date">{dayjs(product.createdAt).fromNow()}</span>
                                     </div>
                                 </div>
                             </Link>
