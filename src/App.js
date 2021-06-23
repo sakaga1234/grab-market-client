@@ -14,7 +14,7 @@ function App() {
       <div id="header">
             <div id="header-area">
               <Link to="/">
-                <img src="/images/icons/logo.png" alt="이미지"  />
+                <img src="/images/icons/logo.png"/>
               </Link>
               <Button size="large"
               onClick={function(){
@@ -31,7 +31,7 @@ function App() {
         <Route exact={true} path="/">
           <MainPageComponent />
         </Route>
-        <Route exact={true} path="/product/:id">
+        <Route exact={true} path="/products/:id">
           <ProductPage />
         </Route>
         <Route exact={true} path="/upload">
